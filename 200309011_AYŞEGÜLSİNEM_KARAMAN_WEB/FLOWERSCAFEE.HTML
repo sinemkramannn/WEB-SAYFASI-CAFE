@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FLOWERS CAFE</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/css/bootstrap.min.css"><!-- Bootstrap CSS kütüphanesinin stil dosyasını dahil eder. Bootstrap, web sayfalarını hızlı bir şekilde tasarlamak için kullanılan bir CSS çerçevesidir.-->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/js/bootstrap.bundle.min.js"></script><!-- Burası, Bootstrap JavaScript kütüphanesini dahil eder. Bootstrap, bazı interaktif öğeler ve bileşenler için JavaScript kodlarını içerir.-->
+    <style>
+        body {/* sayfa kenar boşluklarını (margin) ve dolgularını (padding) sıfıra ayarlar ve arka plan resmini belirler.*/
+            margin: 0; 
+            padding: 0;
+            background-image: url('resin.jpeg');
+        }
+        
+        #background {/* arkaplan resminin container'ının stillerini tanımlar. Position, width, height ve z-index gibi özelliklerle tam sayfa arkaplanı oluşturur.*/
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        #background img { /* Bu stil bloğu, arkaplan resimlerinin stillerini tanımlar. Resimlerin tam sayfa boyutunda görüntülenmesi ve başlangıçta gizli (none) olması sağlanır.*/
+            width: 100%;
+            height: 100%;
+            display: none;
+        }
+        
+        #buttonContainer { /*düğmelerin container'ının stillerini tanımlar. Position özelliği ile sayfanın sağ alt köşesine yerleştirilir. */
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+        }
+
+        .button { /* Bu stil bloğu, düğmelerin stillerini tanımlar. Örneğin, düğme arkaplanı, metin rengi, yükseklik ve diğer stil özellikleri belirlenir.*/
+            display: inline-block;
+            margin-right: 10px;
+            padding: 10px;        
+            background-color: #000;
+            color: #b18080;
+            text-decoration: none; /* Metin altını çizmek için kullanıldı*/
+            font-size: 18px;
+        }
+        
+        #content { /*Bu stil bloğu, içerik container'ının stillerini tanımlar. Position ve transform özellikleri kullanılarak ortalanmasını sağlanır. */
+            position: fixed;
+            top: 50%;
+            left: 20px;
+            transform: translateY(-50%);
+            font-family: Arial, sans-serif;
+            color: #080808;
+        }
+        
+        .section { /* container'ının stillerini tanımlar.Sol taraftaki Örneğin, bölüm arkaplan rengi, dolgu, kenar yuvarlaklığı ve diğer özellikler belirlenir.*/
+            background-color: rgba(240, 102, 102, 0.5);
+            padding: 30px;
+            border-radius: 0;
+            margin-bottom: 60px;
+            height: 900px; /* Section boyunu ayarlarız */ 
+        }
+        .column { /* Bu stil bloğu, sütun container'ının stillerini tanımlar. display ve place-items özellikleri kullanılarak içeriğin ortalanması sağlanır.*/
+            display: grid;
+            place-items: center;
+            width: 50%;
+            height: 600px;
+            margin: 0 auto;
+        }
+        .section_solbutton { /* Bu stil bloğu, orta kısımdaki bölüm container'ının stillerini tanımlar. display özelliği ile başlangıçta gizli olmasını sağlar. Örneğin, arkaplan rengi, dolgu, kenar yuvarlaklığı gibi özellikler belirlenir.*/
+            display: grid; 
+            background-color: rgba(240, 102, 102, 0.5); /* şeffaflık sağlandı*/
+            padding: 100px;
+            border-radius: 0;
+            width: 100%;
+            max-width: 400px; 
+            height: 80%;
+            display: none; /* Sayfa ilk açıldığında gizli olacak şekilde ayarlandı */
+        }
+        h2 { /* Başlıklar için boyut vs ayarlandı.*/
+            font-size: 24px;
+            margin-bottom: 10px;
+            margin-top: 0;
+        }
+        .navbar { /* Navigazyon çubuğunun ayarı yapıldı.*/
+            position: fixed;
+            top: 0; /* Navigasyon çubuğunu üst kısma sabitler*/
+            right: 0;
+            padding: 10px;
+            background-color: #000;
+            color: #b18080;
+        }
+        .navbar a {
+            margin-right: 10px; /*Navigasyon çubuğundaki bağlantıların sağ tarafına 10 piksel boşluk ekler. */
+            color: #b18080;
+            text-decoration: none;
+        }
+        .announcement-date { /* Duyuru tarihleri için ayarları yapıldı */
+            color: rgb(4, 85, 61);
+            font-style: italic;
+        }
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            margin-top: 20px;
+        }
+</style>
+</head>
+<body>
+    <div class="navbar"> <!--Bu bölüm, sayfanın üst kısmında bir navigasyon çubuğu oluşturur. İki bağlantı içerir: "İnsan Kaynakları" ve "Haberler ve Duyurular". Bağlantılara tıklandığında belirtilen fonksiyonlar çalıştırılır.-->
+        <a href="#" onclick="goToHumanResources()">İnsan Kaynakları</a>
+        <a href="#" onclick="goToNewsAndAnnouncements()">Haberler ve Duyurular</a>
+    </div>
+    <div id="background"><!-- Bu bölüm, sayfanın arka planında yer alan resimleri içerir. img etiketi kullanılarak altı resim eklenmiştir. Bu resimler, resim1.jpg ile resim6.jpg olarak adlandırılmıştır.-->
+        <img src="resim1.jpg" alt="Resim 1">
+        <img src="resim2.jpg" alt="Resim 2">
+        <img src="resim3.jpg" alt="Resim 3">
+        <img src="resim4.jpg" alt="Resim 4">
+        <img src="resim5.jpg" alt="Resim 5">
+        <img src="resim6.jpg" alt="Resim 6">
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> 
+    <div id="buttonContainer">
+        <a class="button" href="#" onclick="changeImage(0)">#</a> <!--resimlerin değişmesini sağlayan fonksiyonuher bir resim için çağırıldı burası sayfanın sağ alt kısmında bulunan tuşlar bastıkça fotoğraflar değişir.-->
+        <a class="button" href="#" onclick="changeImage(1)">#</a>
+        <a class="button" href="#" onclick="changeImage(2)">#</a>
+        <a class="button" href="#" onclick="changeImage(3)">#</a>
+        <a class="button" href="#" onclick="changeImage(4)">#</a>
+        <a class="button" href="#" onclick="changeImage(5)">#</a>
+    </div>
+    <div id="content"> <!-- Bu bölüm, içeriklerin gösterildiği ana bölümdür. -->
+        <div class="section"> <!--Bir section etiketi içerir ve içinde "FLOWERS CAFE" başlığı ve bir dizi düğme bulunur. Her düğme, showContent() fonksiyonunu çağırır ve içeriğin değişmesini sağlar. Bu düğmeler, "Anasayfa", "Hakkımızda", "Günün Menüsü", "Menü", "Fotoğraflar", "Adres" ve "İletişim" olarak adlandırılmıştır.-->
+            <br>
+            <br>
+            <h2 style="font-size: 40px;">FLOWERS CAFE</h2>
+            <br>
+            <br>
+            <div class="button-container">
+                <a class="button" href="FLOWERSCAFEE.HTML" onclick="showWelcomeMessage(); showContent('anasayfa')">Anasayfa</a>
+                <br>
+                <a class="button" href="about.html" onclick="showContent('hakkimizda')">Hakkımızda</a>
+                <br>
+                <a class="button" href="Gmenu.html" onclick="showContent('gununMenu')">Günün Menüsü</a>
+                <br>
+                <a class="button" href="#" onclick="showContent('menu')">Menü</a>
+                <br>
+                <a class="button" href="#" onclick="showContent('fotograflar')">Fotoğraflar</a>
+                <br>
+                <a class="button" href="#" onclick="showContent('adres')">Adres</a>
+                <br>
+                <a class="button" href="#" onclick="showContent('iletisim')">İletişim</a>
+            </div>
+            <br>
+            <br>
+            <br>
+            <a href="https://www.instagram.com"> <!--Burada logo ekledim-->
+                <img src="insta.png" alt="instagram"> <!--Burada logo ekledim-->
+           </a> 
+           <a href="https://www.facebook.com"> 
+            <img src="facebook.png" alt="facebook"> 
+           </a> 
+        </div>
+    </div>
+    <section class="column"> <!-- Bu bölüm, içeriklerin sütun şeklinde düzenlendiği bir bölümü temsil eder.-->
+        <div class="section_solbutton" id="sectionSolButton"><!-- Bu bölüm,  sol tarafında yer alan düğmelerin ve içeriğin bulunduğu bir bölümdür. İçeriğin başlığı "FLOWERS CAFE" olarak belirtilmiştir.-->
+            <div id="anasayfa" style="display: none;">
+                <!-- Anasayfa içeriği burada yer alacak -->
+            </div>
+            <div id="menu" style="display:none;"><!--Bu bölüm, alt menülerin içeriklerinin gösterileceği bir bölümdür. Başlangıçlar, Ara Sıcaklar, Kahvaltı, Ana Yemekler ve Tatlılar alt menülerine tıkladığınızda ilgili içerikler burada görüntülenecektir.-->
+                <ul style="font-size: 20px">
+                    <li onclick="showSubMenu('baslangiclar')">Başlangıçlar</li>
+                    &nbsp;&nbsp;&nbsp;
+                    <li onclick="showSubMenu('arasıcaklar')">Ara Sıcaklar</li>
+                    &nbsp;&nbsp;&nbsp;
+                    <li onclick="showSubMenu('kahvalti')">Kahvaltı</li>
+                    &nbsp;&nbsp;&nbsp;
+                    <li onclick="showSubMenu('ana_yemek')">Ana Yemekler</li> 
+                    &nbsp;&nbsp;&nbsp; 
+                    <li onclick="showSubMenu('tatlilar')">Tatlılar</li>
+                    <div id="subMenu" style="display: none;"></div>
+                </ul>
+            </div>
+            <div id="fotograflar" style="display:none; display: grid; grid-template-columns: repeat(3, 1fr);"><!-- Bu bölüm, "Fotoğraflar" içeriğini temsil eder. İçeriğin varsayılan olarak gizli olduğu belirtilmiştir. İçerikte, üç adet fotoğraf bulunur ve grid düzeniyle yan yana sıralanır.-->
+
+                <img src="resim7.jpg" alt="Fotoğraf 4" style="width: 100%;">
+                <img src="resim8.jpg" alt="Fotoğraf 5" style="width: 100%;">
+                <img src="resim9.jpg" alt="Fotoğraf 6" style="width: 100%;">
+            </div>
+
+            <div id="adres" style="display:none;">
+                <p style="color: rgb(4, 85, 61);"><b>Kuyumcu İrfan Sok.No : 3B Nişantaşı / İstanbul </b></p>
+                <p style="color: rgb(4, 85, 61);"><b> Paket servisimiz vardır.</b></p>
+            </div>
+            <div id="iletisim" style="display:none;">
+                <p style="color: rgb(4, 85, 61);"><b>T: 0212 296 65 90 / 91</b></p>
+                <p style="color: rgb(4, 85, 61);"><b>Mail : <a href="mailto:info@flowers.com.tr">info@flowers.com.tr</a></b></p><!--mail bağlantısı atıldı.-->
+            </div>
+            <div id="humanResources" style="display:none;">
+                <p style="color: rgb(4, 85, 61);"><b style="font-size: 20px">Ailemize Katılın!!</b></p>
+                <p><b>Flowers Café olarak muhteşem ekibimizin başarımızda en büyük rolü oynadığını biliyoruz. Dolayısıyla, tüm çalışanlarımız için eşit fırsatlar yaratmak, eğitimlerine ve gelişimlerine yatırım yapmak en birinci önceliğimiz.</b></p>
+                <p><b>Geleceğin yeme-içme sektörüne yön verecek potansiyel yöneticiler yetiştirmeye önem veriyoruz; servis, bar ve mutfak birimlerindeki tüm çalışanlarımız Flowers Academy eğitim programlarına dahil olarak bu amaca yönelik çalışma fırsatını değerlendirebiliyor</b></p>
+                <p><b>Haziran 2020 yılından beri House Academy çalışan eğitimimizi uzaktan eğitim platformları ile sağlamaya devam ediyoruz.</b></p>
+                <a href="İş başvuru formu.docx" download>İş Başvuru Formu</a> 
+            </div>
+            <div id="newsAndAnnouncements" style="display:none;">
+                <p><b style="font-size: 20px">Güncel Haberler ve Duyurular !!</b></p>
+                <br>
+                <p><b><span class="announcement-date">1 Haziran 2023 :</span> KOCAELİNDE YENİ ŞUBEMİZ AÇILDI...</b></p>
+                <br>
+                <p><b><span class="announcement-date">28 Mayıs 2023 :</span> YARDIM VE DAYANIŞMA DERNEĞİMİZ ÇALIŞIYOR..</b></p>
+                <br>
+                <p><b><span class="announcement-date">20 Mayıs 2023:</span> AKADEMİ KURSUMUZ DERSLERİNE BAŞLIYOR..</b></p>
+                <br>
+                <p><b><span class="announcement-date">15 Mayıs 2023:</span> ŞUBELERİMİZE MOBİL APP'DEN ULAŞABİLİRSİNİZ...</b></p>
+                <br>
+            </div>
+        </div>
+      </section>
+    <script>
+        function showWelcomeMessage() {
+        alert("Anasayfaya Dönmek üzeresiniz !!");
+      }
+
+    </script>
+    
+    <script>
+        function goToHomePage() {/*Ana sayfaya gitmek için kullanılan bir işlevdir. İlgili bölümü gizler.*/
+            var sectionSolButton = document.getElementById("sectionSolButton");
+            sectionSolButton.style.display = "none"; // Section Sol Button'ı gizle
+        }
+
+        window.onload = function() {//Sayfa yüklendiğinde gerçekleşen olayları dinler. Bu işlevde, ana sayfa düğmesine tıklandığında ilgili bölümü gizleyen ve ana sayfaya dönen bir işlev tanımlanmıştır.
+            var homeButton = document.querySelector(".button-container > a:first-child");
+            homeButton.addEventListener("click", function(event) {
+                var column = document.querySelector('.column');
+                column.classList.toggle('hidden');
+                event.preventDefault(); // Sayfanın yukarı kaymasını engellemek için kullanılır
+                goToHomePage();
+            });
+        }
+    </script>
+    <script>
+        function goToHumanResources() { //İnsan Kaynakları" içeriğine gitmek için kullanılan bir işlevdir.
+            showContent('humanResources'); // İlgili içeriği göstermek için showContent() fonksiyonunu çağırıyoruz
+        }
+
+        function goToNewsAndAnnouncements() { // "Haberler ve Duyurular" içeriğine gitmek için kullanılan bir işlevdir. 
+            showContent('newsAndAnnouncements'); // İlgili içeriği göstermek için showContent() fonksiyonunu çağırıyoruz
+        }
+    </script>
+    <script>
+        function showContent(contentId) { //Belirli bir içeriği göstermek için kullanılan işlevdir. İlgili bölümü görüntülerken diğer bölümleri gizler. İlgili düğmeyi aktif hale getirir. 
+            var sections = document.querySelectorAll(".section_solbutton > div");
+            var buttons = document.querySelectorAll(".button"); //buttons değişkeniyle ise .button sınıfına sahip olan tüm düğmeleri seçer.
+
+            for (var i = 0; i < sections.length; i++) { //Bir döngü aracılığıyla sections dizisinin her bir elemanını kontrol eder. Her döngü adımında, ilgili bölümün id özelliği, contentId ile eşleşip eşleşmediği kontrol edilir.
+                if (sections[i].id === contentId) {//Eğer sections[i].id ile contentId eşleşiyorsa, ilgili bölüm görüntülenir (sections[i].style.display = "block") ve ilgili düğme aktif hale getirilir (buttons[i].classList.add("active")).
+                    sections[i].style.display = "block";
+                    buttons[i].classList.add("active");
+                } else {
+                    sections[i].style.display = "none";//Eğer eşleşme sağlanmazsa, ilgili bölüm gizlenir (sections[i].style.display = "none") ve ilgili düğme pasif hale getirilir (buttons[i].classList.remove("active")).
+                    buttons[i].classList.remove("active");
+                }
+            }
+
+            var sectionSolButton = document.getElementById("sectionSolButton"); //sectionSolButton değişkeniyle sectionSolButton id'sine sahip element seçilir ve görünür hale getirilir (sectionSolButton.style.display = "block").
+            sectionSolButton.style.display = "block"; // Section Sol Button'ı göster
+        }
+    </script>
+
+    <script>
+        var images = document.querySelectorAll("#background img"); //İlgili düğmeye tıklandığında, belirli bir indeksteki görüntüyü göstermek için kullanılır.images değişkeni, #background id'sine sahip olan element içindeki tüm <img> elementlerini seçer.
+        var buttons = document.querySelectorAll(".button");
+
+        function changeImage(index) {
+            for (var i = 0; i < images.length; i++) { //Döngü aracılığıyla tüm görüntülerin görünürlüğünü gizlemek için images[i].style.display = "none" kullanılır.İstenilen indeksteki görüntüyü görünür hale getirmek için images[index].style.display = "block" kullanılır.
+                images[i].style.display = "none";
+            }
+            images[index].style.display = "block";
+        }
+    </script>
+    <script>
+        function showSubMenu(subMenuId) { //Alt menüyü görüntülemek için kullanılır. İlgili alt menü içeriğini subMenu id'sine sahip elementin içine yerleştirir.
+            var subMenu = document.getElementById("subMenu"); //subMenuId parametresi, hangi alt menünün görüntüleneceğini belirlemek için kullanılır.bMenu değişkeni, subMenu id'sine sahip elementi seçer.
+            subMenu.style.display = "block";
+            
+            // İstenilen menüleri burada tanımlayın ve subMenuId'ye göre içeriği güncelleyin bunu switch case ile yaptık.
+            switch (subMenuId) {
+                case "baslangiclar":
+                    subMenu.innerHTML = "<ul><li>Börek Çeşitleri - 10 TL</li><li>Gözleme Çeşitleri - 15 TL</li><li>Meze Çeşitleri - 18 TL</li></ul>"; 
+                    break;
+                case "arasıcaklar":
+                    subMenu.innerHTML = "<ul><li>Poğaça Çeşitleri - 10 TL</li><li>Salata Çeşitleri - 10 TL</li><li>içli Köfte - 30 TL</li></ul>";
+                    break;
+                case "kahvalti":
+                    subMenu.innerHTML = "<ul><li>Omlet çeşitleri - 15 TL</li><li>Tahin-peynir - 10 TL</li><li>Yumurtalı ekmek - 12 TL</li></ul>";
+                    break;
+                case "ana_yemek":
+                    subMenu.innerHTML = "<ul><li>Izgara tavuk - 25 TL</li><li>Izgara et - 35 TL</li><li>Sebzeli pilav - 18 TL</li></ul>";
+                    break;
+                case "tatlilar":
+                    subMenu.innerHTML = "<ul><li>Kadayıf dolması - 15 TL</li><li>Baklava - 12 TL</li><li>Sütlaç - 10 TL</li></ul>";
+                    break;
+                default:
+                    subMenu.innerHTML = "";
+                    break;
+            }
+        }
+    </script>
+</body>
+</html>
